@@ -21,8 +21,8 @@ pipeline {
     steps {
        script {
        def scannerHome = tool 'SonarQubeScanner';
-           withSonarQubeEnv("sonarqube-container") {
-           sh "${tool("sonarqube")}/bin/sonar-scanner \
+           withSonarQubeEnv("SonarQube") {
+           sh "${tool("SonarQubeScanner")}/bin/sonar-scanner \
            -Dsonar.projectKey=test-node-js \
            -Dsonar.sources=. \
            -Dsonar.css.node=. \
