@@ -17,22 +17,7 @@ pipeline {
       }
     }
 
-    stage('SonarQube Analysis') {
-    steps {
-       script {
-       def scannerHome = tool 'SonarQubeScanner';
-           withSonarQubeEnv("Test_Sonar") {
-           sh "${tool("SonarQubeScanner")}/bin/sonar-scanner \
-           -Dsonar.projectKey=sonar-darshankhatri16 \
-           -Dsonar.sources=. \
-           -Dsonar.host.url=http://localhost:9000 \
-           -Dsonar.login=4d3899686a9ec7b0aef9fe5e79b6824b3d5fee21"
-               }
-           }
-       }
-   }
-
-   stage('Test') {
+   stage('Test case execution') {
       steps {
          sh 'npm test'
       }
