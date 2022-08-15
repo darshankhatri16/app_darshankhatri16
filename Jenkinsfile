@@ -22,5 +22,11 @@ pipeline {
          sh 'npm test'
       }
     }
+
+    stage('Kubernetes deployment') {
+      steps {
+         sh 'kubectl apply -f k8s/'
+      }
+    }
   }
 }
