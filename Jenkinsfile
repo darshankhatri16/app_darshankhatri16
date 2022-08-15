@@ -32,7 +32,7 @@ pipeline {
 
     stage('Kubernetes deployment') {
       steps{
-              sh "sed -i 's/nagp-devops-home-assignment-2022-gke:latest/nagp-devops-home-assignment-2022-gke:latest/g' deployment.yaml"
+              sh "sed -i 's/nagp-devops-home-assignment-2022-gke:latest/nagp-devops-home-assignment-2022-gke:latest/g' k8s/deployment.yaml"
               step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME, location: env.LOCATION, manifestPattern: 'deployment.yaml', credentialsId: env.CREDENTIALS_ID, verifyDeployments: true])
       }
     }
