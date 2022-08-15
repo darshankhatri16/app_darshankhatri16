@@ -25,7 +25,7 @@ pipeline {
 
     stage('Kubernetes deployment') {
       steps {
-         sh 'kubectl apply -f k8s/'
+         sh '/usr/local/bin/kubectl apply -f k8s/'
       }
     }
   }
