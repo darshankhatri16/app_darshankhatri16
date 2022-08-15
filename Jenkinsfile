@@ -1,5 +1,12 @@
 pipeline {
   agent any
+
+  environment {
+        PROJECT_ID = 'nagp-workshop-kubernetes'
+        CLUSTER_NAME = 'nagp-kuberetes-batch'
+        LOCATION = 'us-central1'
+        CREDENTIALS_ID = 'kubernetes-config'
+    }
     
   tools {nodejs "nodejs"}
     
@@ -24,13 +31,10 @@ pipeline {
     }
 
     stage('Kubernetes deployment') {
-      steps {
-         withKubeConfig([credentialsId: 'kubernetes-config']) {
-          sh 'curl -LO "https://storage.googleapis.com/kubernetes-release/release/v1.20.5/bin/linux/amd64/kubectl"'  
-          sh 'chmod u+x ./kubectl'
-          sh './kubectl get pods'
+      steps{
+              sh "sed -i 's/nagp-devops-home-assignment-2022-gke:latest/nagp-devops-home-assignment-2022-gke:latest/g' deployment.yaml"
+              step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME, location: env.LOCATION, manifestPattern: 'deployment.yaml', credentialsId: env.CREDENTIALS_ID, verifyDeployments: true])
       }
-    }
     }
   }
 }
