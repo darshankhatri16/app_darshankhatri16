@@ -32,9 +32,7 @@ pipeline {
 
     stage('Kubernetes deployment') {
       steps{
-        script {
-          kubernetesDeploy(configs: "k8s/deployment.yaml", kubeconfigId: "k8sconfinodejs")
-        }
+          sh 'kubectl config=${HOME}/.kube/config apply -f k8s/'
       }
     }
   }
