@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nagp-kuberetes-batch-deployment
+  labels:
+    app: nagp-kuberetes-batch
+spec:
+  template:
+    metadata:
+      name: nagp-kuberetes-batch-pod
+      labels:
+        app: nagp-kuberetes-batch
+        type: front-end
+    spec:
+      containers:
+        - name: nodejs-container
+          image: us-central1-docker.pkg.dev/nagp-workshop-kubernetes/nagp-devops-home-assignment-2022/nagp-devops-home-assignment-2022-gke:latest
+  replicas: 4
+  selector:
+    matchLabels:
+      type: front-end
+      app: nagp-kuberetes-batch
