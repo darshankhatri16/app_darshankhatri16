@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: nodejs-container
-          image: khatridarshan16/i-khatridarshan16-main
+          image: us-central1-docker.pkg.dev/nagp-workshop-kubernetes/nagp-devops-home-assignment-2022/nagp-devops-home-assignment-2022-gke:latest
   replicas: 4
   selector:
     matchLabels:

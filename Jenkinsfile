@@ -35,7 +35,8 @@ pipeline {
           withKubeConfig([credentialsId: 'kubernetes-config']) {
           sh 'curl -LO "https://storage.googleapis.com/kubernetes-release/release/v1.20.5/bin/linux/amd64/kubectl"'  
           sh 'chmod u+x ./kubectl'  
-          sh './kubectl config view'
+          sh './kubectl --kubeconfig=${HOME}/.kube/config get ns'
+          sh './kubectl --kubeconfig=${HOME}/.kube/config apply -f k8s/'
         }
       }
     }
